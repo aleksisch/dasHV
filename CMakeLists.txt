@@ -89,32 +89,33 @@ IF ((NOT DAS_HV_INCLUDED) AND ((NOT ${DAS_HV_DISABLED}) OR (NOT DEFINED DAS_HV_D
 		)
 	ENDIF()
 
+	SET(PATH_TO_STATIC_LIB "libhv/build/lib")
 	IF(APPLE)
 		SET(HV_LIBRARIES
-			${DAS_HV_DIR}/hv/lib/libhv_static.a
+			${DAS_HV_DIR}/${PATH_TO_STATIC_LIB}/libhv_static.a
 			"-framework CoreFoundation"
 			"-framework Security"
 		)
 	ELSEIF(UNIX)
-		SET(HV_LIBRARIES ${DAS_HV_DIR}/hv/lib/libhv_static.a)
+		SET(HV_LIBRARIES ${DAS_HV_DIR}/${PATH_TO_STATIC_LIB}/libhv_static.a)
 	ELSEIF(WIN32)
 
 
 		IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 			SET(HV_LIBRARIES
-				${DAS_HV_DIR}/hv/lib/hv_static.lib
+				${DAS_HV_DIR}/${PATH_TO_STATIC_LIB}/hv_static.lib
 				Crypt32.lib
 			)
 		ELSE()
 			SET(HV_LIBRARIES
-				${DAS_HV_DIR}/hv/lib/hv_static.lib
+				${DAS_HV_DIR}/${PATH_TO_STATIC_LIB}/hv_static.lib
 				${OPENSSL_ROOT_DIR}/lib/libcrypto.lib
 				${OPENSSL_ROOT_DIR}/lib/libssl.lib
 				Crypt32.lib
 			)
 		ENDIF()
 	ELSE()
-		SET(HV_LIBRARIES ${DAS_HV_DIR}/hv/lib/hv_static.lib)
+		SET(HV_LIBRARIES ${DAS_HV_DIR}/${PATH_TO_STATIC_LIB}/hv_static.lib)
 	ENDIF()
 
     LIST(APPEND CMAKE_MODULE_PATH ${DAS_HV_DIR})
